@@ -196,11 +196,13 @@ export default function ShowFixedAssets() {
         })
         let assetCategoriesComponent = <DropdownList itemsHeader={listCategories} itemsSubheader={listElements} isOpened={openList} />
         let assetStatesView = "/activos-fijos/estados"
+        let assetCategoriesView = "/activos-fijos/categorias"
         let assetResponsiblesView = "/activos-fijos/responsables"
         let assetTypesByCategoryView = "/activos-fijos/tipos-por-categoria"
         let nexFixedAsset = "/crear-activo-fijo"
         const buttonsList =
             <Box sx={{ display: 'flex' }}>
+                <ButtonPrimary label={"Gestionar Categorias"} onClick={() => navigate(assetCategoriesView)} />
                 <ButtonPrimary label={"Gestionar Estados"} onClick={() => navigate(assetStatesView)} />
                 <ButtonPrimary label={"Gestionar Tipos"} onClick={()=>navigate(assetTypesByCategoryView)}/>
                 <ButtonPrimary label={"Gestionar Responsables"} onClick={()=>navigate(assetResponsiblesView)}/>
