@@ -24,7 +24,7 @@ export default function ShowFixedAssets() {
     const [showAlert, setShowAlert] = useState(location.state ? location.state.showAlert : false)
     const [alertMessage, setAlertMessage] = useState(location.state ? location.state.alertMessage : null)
     const [severity, setSeverity] = useState(location.state ? location.state.severity : "success")
-    const urlAssetStates = process.env.REACT_APP_BACKEND_URL + '/api/assetCategories/'
+    const urlAssetStates = process.env.REACT_APP_BACKEND_URL + '/api/assetCategories'
     const urlAssetState = process.env.REACT_APP_BACKEND_URL + '/api/assetCategories/'
     const [assetStates, setAssetStates] = useState(null)
     const [errorAssetStates, setErrorAssetStates] = useState(null)
@@ -51,7 +51,8 @@ export default function ShowFixedAssets() {
         ).catch((e)=>{
             setErrorAssetStates(e)
         })
-    }    
+    }
+
     useEffect(() => {
         axios.get(urlAssetStates).then(
             res => setAssetStates(res.data)
@@ -91,8 +92,8 @@ export default function ShowFixedAssets() {
             category: '' // string            
         }        
         if(!datas.category||datas.category.length==0)
-            errors.category= "El Estado es requerido!"
-        return errors  
+            errors.category= "La categoria es requerida!"
+        return errors     
     }
 
     const handleSave = ({value,previousValue},id) => {
@@ -110,7 +111,7 @@ export default function ShowFixedAssets() {
 
     function submitUpdate(id,updateData){
         axios.put(urlAssetState + id, updateData).then((res) => {
-            if (res.category == 200) {               
+            if (res.status == 200) {               
                 setShowAlert(true)
                 setAlertMessage("Estado actualizado")
                 setSeverity("success")
@@ -237,8 +238,8 @@ export default function ShowFixedAssets() {
                     handle(e)            
                 }}
             />
-            {formErrors.category? <Alert  sx={{ wieditdth: 1, pt: 1 }} severity="error"> 
-                {formErrors.category}                   
+            {formErrors.state? <Alert  sx={{ wieditdth: 1, pt: 1 }} severity="error"> 
+                {formErrors.state}                   
             </Alert>:<p></p> }
             <ButtonPrimary label={"Crear Categoria"} id="submit_button" onClick={submitCreate}/>
             </FormContainer>
